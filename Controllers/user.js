@@ -1,17 +1,6 @@
 const UserService = require("../Services/user");
-const bcrypt = require("bcryptjs");
-const passport = require("passport");
 const UserController = {};
 
-UserController.getAllUser = async (req, res) => {
-  try {
-    const user = await UserService.getAllUser();
-    res.status(200).json(user);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
 UserController.getUserInfo = async (req, res) => {
   try {
     const userInfo = await UserService.getUserInfo(req.params.id);
