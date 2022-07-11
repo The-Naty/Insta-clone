@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const UserController = require("../Controllers/user");
+const AuthController = require("../Controllers/auth");
 
 router.get("/:id", auth, UserController.getUserInfo);
 router.get("/", auth, admin, UserController.getAllUser);
-
 router.post(
   "/signup",
   RequestValidator.validate(UserValidator.createUser),
