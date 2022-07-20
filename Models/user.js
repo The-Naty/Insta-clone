@@ -8,13 +8,7 @@ const userSchema = new mongoose.Schema({
     maxlength: 16,
     unique: true,
   },
-  firstName: {
-    type: String,
-    required: true,
-    minlength: 1,
-    maxlength: 16,
-  },
-  lastName: {
+  Name: {
     type: String,
     required: true,
     minlength: 1,
@@ -30,10 +24,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 8,
     maxlength: 24,
-  },
-  isAdmin: {
-    type: Boolean,
-    default: false,
   },
 });
 
