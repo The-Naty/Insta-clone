@@ -1,4 +1,6 @@
 const UserService = require("../Services/user");
+const bcrypt = require("bcryptjs");
+const passport = require("passport");
 const UserController = {};
 
 UserController.getAllUser = async (req, res) => {
@@ -37,15 +39,6 @@ UserController.createUser = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res.status(500).send({ message: "Internal server error" });
-  }
-};
-UserController.userUpdate = async (req, res) => {
-  try {
-    const user = await UserService.userUpdate(req.params.id, req.body);
-    res.status(200).json(user);
-  } catch (error) {
-    console.log(error);
     res.status(500).send({ message: "Internal server error" });
   }
 };
