@@ -30,6 +30,15 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     bio: { type: String, maxlength: 150 },
+    gender: {
+      type: String,
+      enum: ["male", "female"],
+    },
+    dateOfBirth: {
+      type: Date,
+      required: true,
+      trim: true,
+    },
     posts: {
       type: Number,
     },
