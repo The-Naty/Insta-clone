@@ -1,5 +1,4 @@
 const AuthService = require("../Services/auth");
-const bcrypt = require("bcryptjs");
 const AuthController = {};
 
 AuthController.getUserInfo = async (req, res) => {

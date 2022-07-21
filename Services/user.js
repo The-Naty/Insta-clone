@@ -1,6 +1,5 @@
 const UserService = {};
 const User = require("../Models/user");
-const bcrypt = require("bcryptjs");
 
 UserService.getAllUser = async () => {
   try {
