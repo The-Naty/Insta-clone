@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    phoneNr: {
+      type: String,
+      match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
+    },
     posts: {
       type: Number,
     },
