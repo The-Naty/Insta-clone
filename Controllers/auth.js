@@ -1,28 +1,6 @@
 const AuthService = require("../Services/auth");
 const AuthController = {};
 
-AuthController.getUserInfo = async (req, res) => {
-  try {
-    const userInfo = await AuthService.getUserInfo(req.params.id);
-
-    res.status(200).json(userInfo);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: "Internal server error" });
-  }
-};
-
-AuthController.getMyInfo = async (req, res) => {
-  try {
-    const myInfo = await AuthService.getMyInfo(req.user._id);
-
-    res.status(200).json(myInfo);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: "Internal server error" });
-  }
-};
-
 AuthController.createUser = async (req, res) => {
   try {
     const user = await AuthService.createUser(req.body);
