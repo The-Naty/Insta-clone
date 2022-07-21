@@ -26,6 +26,19 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 8,
     },
+    profile_picture: {
+      type: String,
+    },
+    bio: { type: String, maxlength: 150 },
+    posts: {
+      type: Number,
+    },
+    following: {
+      type: Number,
+    },
+    follower: {
+      type: Number,
+    },
   },
   {
     timestamps: {
