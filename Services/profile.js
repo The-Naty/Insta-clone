@@ -21,4 +21,16 @@ ProfileService.getMyInfo = async (id) => {
   }
 };
 
+ProfileService.userUpdate = async (id, user) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(id, user, {
+      new: true,
+    });
+    return updatedUser;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = ProfileService;

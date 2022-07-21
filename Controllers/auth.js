@@ -20,16 +20,6 @@ AuthController.createUser = async (req, res) => {
   }
 };
 
-AuthController.updateUser = async (req, res) => {
-  try {
-    const user = await AuthService.userUpdate(req.params.id, req.body);
-    res.status(200).json("User is successfully updated");
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: "Internal server error" });
-  }
-};
-
 AuthController.userLogin = async (req, res) => {
   try {
     const user = await AuthService.userLogin(req.body);

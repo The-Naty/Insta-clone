@@ -23,4 +23,14 @@ ProfileController.getMyInfo = async (req, res) => {
   }
 };
 
+ProfileController.updateUser = async (req, res) => {
+  try {
+    const user = await ProfileService.userUpdate(req.params.id, req.body);
+    res.status(200).json("User is successfully updated");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Internal server error" });
+  }
+};
+
 module.exports = ProfileController;
