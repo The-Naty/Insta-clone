@@ -5,8 +5,6 @@ const RequestValidator = require("../Middlewares/requestValidator");
 const UserValidator = require("../Validations/user");
 const auth = require("../Middlewares/auth");
 
-router.get("/me", auth, AuthController.getMyInfo);
-router.get("/:id", auth, AuthController.getUserInfo);
 router.post(
   "/signup",
   RequestValidator.validate(UserValidator.createUser),
