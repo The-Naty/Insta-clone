@@ -11,6 +11,5 @@ router.post(
   AuthController.createUser
 );
 router.post("/login", auth, AuthController.userLogin);
-router.put("/:id", auth, AuthController.updateUser);
 
 module.exports = router;
