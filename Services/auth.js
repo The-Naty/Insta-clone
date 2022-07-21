@@ -2,26 +2,6 @@ const AuthService = {};
 const User = require("../Models/user");
 const bcrypt = require("bcryptjs");
 
-AuthService.getUserInfo = async (id) => {
-  try {
-    const user = User.findById(id).select("-password");
-    return user;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
-
-AuthService.getMyInfo = async (id) => {
-  try {
-    const myInfo = User.findById(id).select("-password");
-    return myInfo;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
-
 AuthService.createUser = async (user) => {
   try {
     const newUser = new User(user);
