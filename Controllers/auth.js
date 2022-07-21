@@ -33,7 +33,7 @@ AuthController.createUser = async (req, res) => {
 
     res
       .status(200)
-      .header("x-auth-token", token)
+      .header("Authorization", token)
       .send(`${user.userName} is successfully registered`);
   } catch (error) {
     console.log(error);
@@ -59,7 +59,7 @@ AuthController.userLogin = async (req, res) => {
     const token = user.generateAuthToken();
     res
       .status(200)
-      .header("x-auth-token", token)
+      .header("Authorization", token)
       .send(`${user.userName} logged in successfully!`);
   } catch (error) {
     console.log(error);
