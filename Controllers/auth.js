@@ -12,7 +12,7 @@ AuthController.createUser = async (req, res) => {
     res
       .status(200)
       .header("Authorization", token)
-      .send(`${user.userName} is successfully registered`);
+      .send(`${user.user_name} is successfully registered`);
   } catch (error) {
     console.log(error);
 
@@ -28,7 +28,7 @@ AuthController.userLogin = async (req, res) => {
     res
       .status(200)
       .header("Authorization", token)
-      .send(`${user.userName} logged in successfully!`);
+      .send(`${user.user_name} logged in successfully!`);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Internal server error" });

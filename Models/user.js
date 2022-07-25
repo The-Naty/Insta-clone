@@ -3,13 +3,13 @@ const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
-    userName: {
+    user_name: {
       type: String,
       required: true,
       maxlength: 16,
       unique: true,
     },
-    nickName: {
+    nick_name: {
       type: String,
       required: true,
       minlength: 1,
@@ -34,12 +34,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["male", "female"],
     },
-    dateOfBirth: {
+    date_of_birth: {
       type: Date,
-      required: true,
-      trim: true,
     },
-    phoneNr: {
+    phone_number: {
       type: String,
       match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
     },

@@ -15,7 +15,7 @@ UserController.deleteUser = async (req, res) => {
   try {
     const user = await UserService.deleteUser(req.params.id);
     if (!user) return res.status(404).send({ message: "User not found" });
-    res.status(200).send(`${user.userName} is successfully deleted`);
+    res.status(200).send(`${user.user_name} is successfully deleted`);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Internal server error" });

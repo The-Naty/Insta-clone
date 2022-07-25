@@ -12,7 +12,7 @@ AuthService.createUser = async (user) => {
 
     return savedUser;
   } catch (error) {
-    if (user.userName === error.keyValue.userName)
+    if (user.user_name === error.keyValue.user_name)
       return { error: "Username already exists" };
     if (user.email === error.keyValue.email)
       return { error: "Email already exists" };
@@ -34,7 +34,7 @@ AuthService.userUpdate = async (id, user) => {
 AuthService.userLogin = async (user) => {
   try {
     const userInfo = await User.findOne({
-      $or: [{ userName: user.userName }, { email: user.email }],
+      $or: [{ userName: user.user_name }, { email: user.email }],
     });
     if (!userInfo) return { error: "User not valid" };
     const validPassword = await bcrypt.compare(
