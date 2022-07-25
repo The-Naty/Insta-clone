@@ -4,18 +4,24 @@ const bcrypt = require("bcryptjs");
 
 AuthService.createUser = async (user) => {
   try {
+    const userExists = await User.findOne({
+      $or: [{ user_name: user.user_name }, { email: user.email }],
+    });
+    if (userExists) {
+      return { error: "Username or Email already exists" };
+    }
+
     const newUser = new User(user);
-    const savedUser = await newUser.save();
+
+    await newUser.save();
 
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
+    newUser.password = await bcrypt.hash(newUser.password, salt);
 
-    return savedUser;
+    const token = newUser.generateAuthToken();
+
+    return { newUser, token };
   } catch (error) {
-    if (user.user_name === error.keyValue.user_name)
-      return { error: "Username already exists" };
-    if (user.email === error.keyValue.email)
-      return { error: "Email already exists" };
     throw error;
   }
 };
@@ -34,7 +40,7 @@ AuthService.userUpdate = async (id, user) => {
 AuthService.userLogin = async (user) => {
   try {
     const userInfo = await User.findOne({
-      $or: [{ userName: user.user_name }, { email: user.email }],
+      $or: [{ user_name: user.user_name }, { email: user.email }],
     });
     if (!userInfo) return { error: "User not valid" };
     const validPassword = await bcrypt.compare(

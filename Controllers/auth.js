@@ -3,16 +3,13 @@ const AuthController = {};
 
 AuthController.createUser = async (req, res) => {
   try {
-    const user = await AuthService.createUser(req.body);
-    if (user.error) return res.status(400).send(user.error);
-
-    await user.save();
-    const token = user.generateAuthToken();
+    const response = await AuthService.createUser(req.body);
+    if (response.error) return res.status(400).send(response.error);
 
     res
       .status(200)
-      .header("Authorization", token)
-      .send(`${user.user_name} is successfully registered`);
+      .header("Authorization", response.token)
+      .send(`${response.newUser.user_name} is successfully registered`);
   } catch (error) {
     console.log(error);
 
