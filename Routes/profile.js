@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const ProfileController = require("../Controllers/profile");
 const auth = require("../Middlewares/auth");
-const multer = require("multer");
-const upload = multer({ dest: "./Public/Uploads" });
 
 router.get("/me", auth, ProfileController.getMyInfo);
 router.get("/:id", auth, ProfileController.getUserInfo);
