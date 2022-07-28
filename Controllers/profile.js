@@ -35,18 +35,14 @@ ProfileController.updateUser = async (req, res) => {
   }
 };
 
-// ProfileController.uploadPicture = async (req, res) => {
-//   try {
-//     // const responde = await ProfileService.userUpload()
-//     console.log(req.body);
-//     upload.single("profile");
-//     console.log(req.file);
-//     // console.log(res);
-//     res.status(200).json(req.file);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(400).send("fe moshkel");
-//   }
-// };
+ProfileController.uploadPicture = async (req, res) => {
+  try {
+    req.file.userid = req.user._id;
+    res.send(req.file);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error.message);
+  }
+};
 
 module.exports = ProfileController;
