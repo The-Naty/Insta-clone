@@ -25,8 +25,10 @@ ProfileController.getMyInfo = async (req, res) => {
 
 ProfileController.updateUser = async (req, res) => {
   try {
-    const user = await ProfileService.userUpdate(req.user._id, req.body);
-    res.status(200).json("User is successfully updated");
+    const response = await ProfileService.userUpdate(req.user._id, req.body);
+
+    if (response.error) return res.status(400).send(response.error);
+    res.status(200).json(response);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Internal server error" });

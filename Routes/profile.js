@@ -8,7 +8,7 @@ router.get("/me", auth, ProfileController.getMyInfo);
 router.get("/:id", auth, ProfileController.getUserInfo);
 router.put("/edit", auth, ProfileController.updateUser);
 // router.post("/upload", ProfileController.uploadPicture);
-router.post("/upload", upload.single("profile"), (req, res) => {
+router.post("/upload", auth, upload.single("profile"), (req, res) => {
   try {
     res.send(req.file);
   } catch (err) {
