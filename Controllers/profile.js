@@ -37,7 +37,6 @@ ProfileController.updateUser = async (req, res) => {
 
 ProfileController.uploadPicture = async (req, res) => {
   try {
-    req.file.userid = req.user._id;
     res.send(req.file);
   } catch (error) {
     console.log(error);
