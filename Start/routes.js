@@ -4,6 +4,7 @@ const AuthRouter = require("../Routes/auth");
 const UserRouter = require("../Routes/user");
 
 module.exports = function (app) {
+  app.use("/public", express.static("public"));
   app.use(express.json());
   app.use("/profile", ProfileRouter);
   app.use("/auth", AuthRouter);

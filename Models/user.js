@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 8,
     },
-    profile_picture: {
+    user_avatar: {
       type: String,
     },
     bio: { type: String, maxlength: 150 },

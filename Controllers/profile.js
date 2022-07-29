@@ -37,6 +37,13 @@ ProfileController.updateUser = async (req, res) => {
 
 ProfileController.uploadPicture = async (req, res) => {
   try {
+    const response = await ProfileService.uploadAvatar(
+      req.user._id,
+      req.file.filename
+    );
+
+    if (response.error) return res.status(400).send(response.error);
+
     res.send(req.file);
   } catch (error) {
     console.log(error);

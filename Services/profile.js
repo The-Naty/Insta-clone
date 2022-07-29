@@ -40,4 +40,16 @@ ProfileService.userUpdate = async (id, user) => {
   }
 };
 
+ProfileService.uploadAvatar = async (userId, fileName) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(userId, {
+      user_avatar: fileName,
+    });
+    return updatedUser;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = ProfileService;

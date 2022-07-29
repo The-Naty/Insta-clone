@@ -6,9 +6,7 @@ const upload = require("../Middlewares/multer");
 
 router.get("/me", auth, ProfileController.getMyInfo);
 router.put("/edit", auth, ProfileController.updateUser);
-// router.post("/upload", ProfileController.uploadPicture);
-// router.get("/upload");
-router.post(
+router.put(
   "/upload",
   [auth, upload.single("profile")],
   ProfileController.uploadPicture
