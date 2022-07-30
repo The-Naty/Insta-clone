@@ -55,6 +55,7 @@ ProfileService.userUpdate = async (id, user) => {
 ProfileService.uploadAvatar = async (userId, path) => {
   try {
     const user = await User.findById(userId);
+    console.log("dfafasfa");
     if (user.user_avatar) {
       fs.unlinkSync(user.user_avatar);
     }
