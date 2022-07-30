@@ -4,7 +4,7 @@ const UserController = {};
 UserController.getAllUser = async (req, res) => {
   try {
     const user = await UserService.getAllUser();
-    res.status(200).json(user);
+    res.status(200).send(user);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });

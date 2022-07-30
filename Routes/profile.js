@@ -11,5 +11,6 @@ router.put(
   [auth, upload.single("profile")],
   ProfileController.uploadPicture
 );
+router.delete("/avatar", auth, ProfileController.deleteAvatar);
 router.get("/:id", auth, ProfileController.getUserInfo);
 module.exports = router;

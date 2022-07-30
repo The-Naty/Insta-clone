@@ -1,9 +1,22 @@
 const ProfileService = {};
 const User = require("../Models/user");
+const fs = require("fs");
 
 ProfileService.getUserInfo = async (id) => {
   try {
-    const user = User.findById(id).select("-password");
+    const user = await User.findById(id).select("-password");
+
+    if (!user) return { error: "User does not exist" };
+
+    if (user.user_avatar) {
+      user.user_avatar =
+        "http://localhost:5000/public/uploads/profilepictures/" +
+        user.user_avatar;
+    } else {
+      user.user_avatar =
+        "http://localhost:5000/public/uploads/profilepictures/default.jpg";
+    }
+
     return user;
   } catch (error) {
     console.log(error);
@@ -13,7 +26,18 @@ ProfileService.getUserInfo = async (id) => {
 
 ProfileService.getMyInfo = async (id) => {
   try {
-    const myInfo = User.findById(id).select("-password");
+    const myInfo = await User.findById(id).select("-password");
+
+    if (!myInfo) return { error: "User does not exist" };
+
+    if (myInfo.user_avatar) {
+      myInfo.user_avatar =
+        "http://localhost:5000/public/uploads/profilepictures/" +
+        myInfo.user_avatar;
+    } else {
+      myInfo.user_avatar =
+        "http://localhost:5000/public/uploads/profilepictures/default.jpg";
+    }
     return myInfo;
   } catch (error) {
     console.log(error);
@@ -40,10 +64,15 @@ ProfileService.userUpdate = async (id, user) => {
   }
 };
 
-ProfileService.uploadAvatar = async (userId, fileName) => {
+ProfileService.deleteAvatar = async (userId) => {
   try {
+    const user = await User.findById(userId);
+
+    if (user.user_avatar)
+      fs.unlinkSync("./public/uploads/profilepictures/" + user.user_avatar);
+
     const updatedUser = await User.findByIdAndUpdate(userId, {
-      user_avatar: fileName,
+      user_avatar: null,
     });
     return updatedUser;
   } catch (error) {
