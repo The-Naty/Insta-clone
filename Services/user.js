@@ -1,9 +1,13 @@
 const UserService = {};
 const User = require("../Models/user");
+const avatarPath = require("../Util/avatarPath");
 
 UserService.getAllUser = async () => {
   try {
     const user = await User.find().select("-password");
+
+    user.user_avatar = avatarPath(user.user_avatar);
+
     return user;
   } catch (error) {
     console.log(error);

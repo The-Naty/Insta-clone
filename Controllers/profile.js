@@ -15,7 +15,7 @@ ProfileController.getUserInfo = async (req, res) => {
 ProfileController.getMyInfo = async (req, res) => {
   try {
     const myInfo = await ProfileService.getMyInfo(req.user._id);
-    console.log(myInfo);
+
     res.status(200).send(myInfo);
   } catch (error) {
     console.log(error);
@@ -39,7 +39,7 @@ ProfileController.uploadPicture = async (req, res) => {
   try {
     const response = await ProfileService.uploadAvatar(
       req.user._id,
-      req.file.filename
+      req.file.path
     );
 
     if (response.error) return res.status(400).send(response.error);
