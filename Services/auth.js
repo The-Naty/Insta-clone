@@ -13,11 +13,10 @@ AuthService.createUser = async (user) => {
 
     const newUser = new User(user);
 
-    await newUser.save();
-
     const salt = await bcrypt.genSalt(10);
     newUser.password = await bcrypt.hash(newUser.password, salt);
 
+    await newUser.save();
     const token = newUser.generateAuthToken();
 
     return { newUser, token };
@@ -47,6 +46,7 @@ AuthService.userLogin = async (user) => {
       user.password,
       userInfo.password
     );
+
     if (!validPassword) return { error: "Invalid password" };
     return userInfo;
   } catch (error) {
