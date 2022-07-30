@@ -71,7 +71,7 @@ ProfileService.uploadAvatar = async (userId, fileName) => {
 ProfileService.deleteAvatar = async (userId) => {
   try {
     const user = await User.findById(userId);
-
+    console.log("a7a7a7a7a7a7a");
     if (user.user_avatar)
       fs.unlinkSync("./public/uploads/profilepictures/" + user.user_avatar);
 
