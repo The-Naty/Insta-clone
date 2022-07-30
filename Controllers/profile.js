@@ -39,12 +39,12 @@ ProfileController.uploadPicture = async (req, res) => {
   try {
     const response = await ProfileService.uploadAvatar(
       req.user._id,
-      req.file.path
+      req.file.filename
     );
 
     if (response.error) return res.status(400).send(response.error);
 
-    res.send(req.file);
+    res.status(200).send(req.file);
   } catch (error) {
     console.log(error);
     res.status(400).send(error.message);
@@ -56,7 +56,7 @@ ProfileController.deleteAvatar = async (req, res) => {
     const response = await ProfileService.deleteAvatar(req.user._id);
     if (response.error) return res.status(400).send(response.error);
 
-    res.send(response);
+    res.status(200).send(response);
   } catch (error) {
     console.log(error);
     res.status(400).send(error.message);

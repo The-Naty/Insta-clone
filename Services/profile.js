@@ -52,14 +52,14 @@ ProfileService.userUpdate = async (id, user) => {
   }
 };
 
-ProfileService.uploadAvatar = async (userId, path) => {
+ProfileService.uploadAvatar = async (userId, fileName) => {
   try {
     const user = await User.findById(userId);
     if (user.user_avatar) {
       fs.unlinkSync(user.user_avatar);
     }
     const updatedUser = await User.findByIdAndUpdate(userId, {
-      user_avatar: "http://localhost:5000/" + path,
+      user_avatar: "http://localhost:5000/" + fileName,
     });
     return updatedUser;
   } catch (error) {
