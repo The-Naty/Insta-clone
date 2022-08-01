@@ -19,6 +19,22 @@ const createUser = {
     .required(),
 };
 
+const editUser = {
+  body: Joi.object().keys({
+    nick_name: Joi.string().min(1).max(16).required(),
+    email: Joi.string().email().required(),
+    bio: Joi.string().max(150),
+    gender: Joi.array().items(Joi.string().valid("male", "female")),
+    date_of_birth: Joi.date().raw(),
+  }),
+};
+
+// const changePassword ={
+//   body: Joi.object().keys({
+
+//   })
+// };
+
 module.exports = {
   createUser,
 };
