@@ -1,6 +1,7 @@
 const AuthService = {};
 const User = require("../Models/user");
 const bcrypt = require("bcryptjs");
+// const avatarPath = require("../Util/avatarPath");
 
 AuthService.createUser = async (user) => {
   try {

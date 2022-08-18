@@ -1,15 +1,13 @@
 const ProfileService = {};
 const User = require("../Models/user");
 const fs = require("fs");
-const avatarPath = require("../Util/avatarPath");
+const userAvatarPath = "./public/uploads/profilepictures/";
 
 ProfileService.getUserInfo = async (id) => {
   try {
     const user = await User.findById(id).select("-password");
 
     if (!user) return { error: "User does not exist" };
-
-    user.user_avatar = avatarPath(user.user_avatar);
 
     return user;
   } catch (error) {
@@ -55,11 +53,11 @@ ProfileService.userUpdate = async (id, user) => {
 ProfileService.uploadAvatar = async (userId, fileName) => {
   try {
     const user = await User.findById(userId);
-    if (user.user_avatar) {
-      fs.unlinkSync(user.user_avatar);
+    if (user.user_avatar != "default.jpg") {
+      fs.unlinkSync("./public/uploads/profilepictures/" + user.user_avatar);
     }
     const updatedUser = await User.findByIdAndUpdate(userId, {
-      user_avatar: "http://localhost:5000/" + fileName,
+      user_avatar: fileName,
     });
     return updatedUser;
   } catch (error) {
@@ -71,13 +69,17 @@ ProfileService.uploadAvatar = async (userId, fileName) => {
 ProfileService.deleteAvatar = async (userId) => {
   try {
     const user = await User.findById(userId);
-    if (user.user_avatar)
+    if (user.user_avatar != "default.jpg") {
       fs.unlinkSync("./public/uploads/profilepictures/" + user.user_avatar);
 
-    const updatedUser = await User.findByIdAndUpdate(userId, {
-      user_avatar: null,
-    });
-    return updatedUser;
+      const updatedUser = await User.findByIdAndUpdate(userId, {
+        user_avatar: "default.jpg",
+      });
+
+      return updatedUser;
+    } else {
+      return "User avatar already set to default";
+    }
   } catch (error) {
     console.log(error);
     throw error;
