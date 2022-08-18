@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const postSchema = new mongoose.Schema(
   {
     owner_id: {
-      type: ObjectId,
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
       required: true,
     },
     title: {
@@ -15,6 +19,7 @@ const postSchema = new mongoose.Schema(
     },
     comments: {
       type: Number,
+      default: 0,
     },
     tags: {
       type: Array,
