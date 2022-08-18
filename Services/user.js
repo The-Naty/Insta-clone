@@ -1,6 +1,5 @@
 const UserService = {};
 const User = require("../Models/user");
-const avatarPath = require("../Util/avatarPath");
 
 UserService.getAllUser = async () => {
   try {
