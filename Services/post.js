@@ -1,5 +1,4 @@
 const PostService = {};
-const User = require("../Models/user");
 const Post = require("../Models/post");
 
 PostService.getAllPost = async () => {
@@ -13,12 +12,12 @@ PostService.getAllPost = async () => {
   }
 };
 
-PostService.uploadPost = async (userId, fileName) => {
+PostService.uploadPost = async (userId, fileName, title) => {
   try {
     const newPost = new Post();
     newPost.owner_id = userId;
     newPost.image = fileName;
-    newPost.title = req.body.title;
+    newPost.title = title;
 
     const savedPost = await newPost.save();
 
