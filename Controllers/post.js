@@ -15,7 +15,8 @@ PostController.uploadPicture = async (req, res) => {
   try {
     const response = await PostService.uploadPost(
       req.user._id,
-      req.file.filename
+      req.file.filename,
+      req.body.title
     );
 
     if (response.error) return res.status(400).send(response.error);

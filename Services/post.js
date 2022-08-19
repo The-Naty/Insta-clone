@@ -1,4 +1,5 @@
 const PostService = {};
+const User = require("../Models/user");
 const Post = require("../Models/post");
 
 PostService.getAllPost = async () => {
@@ -14,14 +15,14 @@ PostService.getAllPost = async () => {
 
 PostService.uploadPost = async (userId, fileName) => {
   try {
-    const user = await User.findById(userId);
-    if (user.user_avatar != "default.jpg") {
-      fs.unlinkSync(userAvatarPath + user.user_avatar);
-    }
-    const updatedUser = await User.findByIdAndUpdate(userId, {
-      user_avatar: fileName,
-    });
-    return updatedUser;
+    const newPost = new Post();
+    newPost.owner_id = userId;
+    newPost.image = fileName;
+    newPost.title = req.body.title;
+
+    const savedPost = await newPost.save();
+
+    return savedPost;
   } catch (error) {
     console.log(error);
     throw error;
