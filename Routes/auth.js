@@ -10,6 +10,6 @@ router.post(
   RequestValidator.validate(UserValidator.createUser),
   AuthController.createUser
 );
-router.post("/login", auth, AuthController.userLogin);
+router.post("/login", AuthController.userLogin);
 
 module.exports = router;
