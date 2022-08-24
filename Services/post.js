@@ -28,4 +28,14 @@ PostService.uploadPost = async (userId, fileName, title) => {
   }
 };
 
+PostService.deletePost = async (id) => {
+  try {
+    const post = await Post.findByIdAndDelete(id);
+    return post;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = PostService;

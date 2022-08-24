@@ -27,4 +27,15 @@ PostController.uploadPicture = async (req, res) => {
     res.status(400).send(error.message);
   }
 };
+
+PostController.deletePost = async (req, res) => {
+  try {
+    const post = await PostService.deletePost(req.params.id);
+    if (!post) return res.status(404).send({ message: "Post not found" });
+    res.status(200).send(`Post is successfully deleted`);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Internal server error" });
+  }
+};
 module.exports = PostController;

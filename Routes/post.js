@@ -10,6 +10,6 @@ router.post(
   [auth, upload.single("post")],
   PostController.uploadPicture
 );
-// router.delete("/:id", PostController.deleteUser);
+router.delete("/:id", PostController.deletePost);
 
 module.exports = router;
