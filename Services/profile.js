@@ -1,7 +1,7 @@
 const ProfileService = {};
 const User = require("../Models/user");
 const fs = require("fs");
-const USERAVATARPATH = "./public/uploads/profilepictures/";
+const IMAGESPATH = "./public/uploads/images/";
 
 ProfileService.getUserInfo = async (id) => {
   try {
@@ -9,7 +9,7 @@ ProfileService.getUserInfo = async (id) => {
 
     if (!user) return { error: "User does not exist" };
 
-    user.user_avatar = USERAVATARPATH + user.user_avatar;
+    user.user_avatar = IMAGESPATH + user.user_avatar;
 
     return user;
   } catch (error) {
@@ -24,7 +24,7 @@ ProfileService.getMyInfo = async (id) => {
 
     if (!myInfo) return { error: "User does not exist" };
 
-    myInfo.user_avatar = USERAVATARPATH + myInfo.user_avatar;
+    myInfo.user_avatar = IMAGESPATH + myInfo.user_avatar;
 
     console.log(myInfo);
     return myInfo;
@@ -57,7 +57,7 @@ ProfileService.uploadAvatar = async (userId, fileName) => {
   try {
     const user = await User.findById(userId);
     if (user.user_avatar != "default.jpg") {
-      fs.unlinkSync(USERAVATARPATH + user.user_avatar);
+      fs.unlinkSync(IMAGESPATH + user.user_avatar);
     }
     const updatedUser = await User.findByIdAndUpdate(userId, {
       user_avatar: fileName,
@@ -73,7 +73,7 @@ ProfileService.deleteAvatar = async (userId) => {
   try {
     const user = await User.findById(userId);
     if (user.user_avatar != "default.jpg") {
-      fs.unlinkSync(USERAVATARPATH + user.user_avatar);
+      fs.unlinkSync(IMAGESPATH + user.user_avatar);
 
       const updatedUser = await User.findByIdAndUpdate(userId, {
         user_avatar: "default.jpg",

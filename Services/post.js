@@ -1,5 +1,6 @@
 const PostService = {};
 const Post = require("../Models/post");
+const IMAGESPATH = "./public/uploads/images/";
 
 PostService.getAllPost = async () => {
   try {
@@ -31,6 +32,7 @@ PostService.uploadPost = async (userId, fileName, title) => {
 PostService.deletePost = async (id) => {
   try {
     const post = await Post.findByIdAndDelete(id);
+    fs.unlinkSync(IMAGESPATH + post.image);
     return post;
   } catch (error) {
     console.log(error);

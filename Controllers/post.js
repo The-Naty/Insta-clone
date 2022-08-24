@@ -31,6 +31,7 @@ PostController.uploadPicture = async (req, res) => {
 PostController.deletePost = async (req, res) => {
   try {
     const post = await PostService.deletePost(req.params.id);
+    console.log(post);
     if (!post) return res.status(404).send({ message: "Post not found" });
     res.status(200).send(`Post is successfully deleted`);
   } catch (error) {
