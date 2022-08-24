@@ -72,11 +72,11 @@ ProfileService.uploadAvatar = async (userId, fileName) => {
 ProfileService.deleteAvatar = async (userId) => {
   try {
     const user = await User.findById(userId);
-    if (user.user_avatar != "default.jpg") {
+    if (user.user_avatar != "profile-default.jpg") {
       fs.unlinkSync(IMAGESPATH + user.user_avatar);
 
       const updatedUser = await User.findByIdAndUpdate(userId, {
-        user_avatar: "default.jpg",
+        user_avatar: "profile-default.jpg",
       });
 
       return updatedUser;

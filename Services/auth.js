@@ -48,7 +48,10 @@ AuthService.userLogin = async (user) => {
     );
 
     if (!validPassword) return { error: "Invalid password" };
-    return userInfo;
+
+    const token = newUser.generateAuthToken();
+
+    return { userInfo, token };
   } catch (error) {
     console.log(error);
     throw error;
