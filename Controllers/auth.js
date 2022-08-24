@@ -21,11 +21,11 @@ AuthController.userLogin = async (req, res) => {
   try {
     const user = await AuthService.userLogin(req.body);
     if (user.error) return res.status(400).send(user.error);
-    const token = user.generateAuthToken();
+
     res
       .status(200)
-      .header("Authorization", token)
-      .send(`${user.user_name} logged in successfully!`);
+      .header("Authorization", user.token)
+      .send(`${user.userInfo.user_name} logged in successfully!`);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Internal server error" });

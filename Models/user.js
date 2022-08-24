@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     },
     user_avatar: {
       type: String,
-      default: "default.jpg",
+      default: "profile-default.jpg",
     },
     bio: { type: String, maxlength: 150 },
     gender: {

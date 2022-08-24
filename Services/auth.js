@@ -49,7 +49,7 @@ AuthService.userLogin = async (user) => {
 
     if (!validPassword) return { error: "Invalid password" };
 
-    const token = newUser.generateAuthToken();
+    const token = userInfo.generateAuthToken();
 
     return { userInfo, token };
   } catch (error) {
