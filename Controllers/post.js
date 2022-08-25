@@ -15,7 +15,7 @@ PostController.getMyPost = async (req, res) => {
   try {
     const post = await PostService.getMyPost(req.user._id);
     res.status(200).send(post);
-  } catch {
+  } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });
   }

@@ -15,8 +15,9 @@ PostService.getAllPost = async () => {
 
 PostService.getMyPost = async (userId) => {
   try {
-    const post = await Post.findAll({ owner_id: userId });
+    const post = await Post.find({ owner_id: userId });
 
+    if (post === null) return "No posts added yet !";
     return post;
   } catch (error) {
     console.log(error);
