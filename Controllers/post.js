@@ -13,7 +13,7 @@ PostController.getAllPost = async (req, res) => {
 
 PostController.getMyPost = async (req, res) => {
   try {
-    const post = await PostService.getMyPost();
+    const post = await PostService.getMyPost(req.user._id);
     res.status(200).send(post);
   } catch {
     console.log(error);

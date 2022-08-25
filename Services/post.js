@@ -13,6 +13,17 @@ PostService.getAllPost = async () => {
   }
 };
 
+PostService.getMyPost = async (userId) => {
+  try {
+    const post = await Post.findAll({ owner_id: userId });
+
+    return post;
+  } catch (error) {
+    console.log(error);
+    return { error: "Internal server error" };
+  }
+};
+
 PostService.uploadPost = async (userId, fileName, title) => {
   try {
     const newPost = new Post();
