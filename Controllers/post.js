@@ -11,6 +11,16 @@ PostController.getAllPost = async (req, res) => {
   }
 };
 
+PostController.getMyPost = async (req, res) => {
+  try {
+    const post = await PostService.getMyPost();
+    res.status(200).send(post);
+  } catch {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 PostController.uploadPicture = async (req, res) => {
   try {
     const response = await PostService.uploadPost(
