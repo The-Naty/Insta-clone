@@ -3,7 +3,10 @@ const ReactController = {};
 
 ReactController.followUser = async (req, res) => {
   try {
-    const respond = await ReactService.followUser(req);
+    const respond = await ReactService.followUser(
+      req.user._id,
+      req.body.userId
+    );
 
     res.status(200).send(respond);
   } catch (error) {

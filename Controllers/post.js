@@ -1,7 +1,7 @@
 const PostService = require("../Services/post");
 const PostController = {};
 
-PostController.getAllPost = async (req, res) => {
+PostController.getAllPost = async (res) => {
   try {
     const post = await PostService.getAllPost();
     res.status(200).send(post);
