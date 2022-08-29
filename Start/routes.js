@@ -3,6 +3,7 @@ const ProfileRouter = require("../Routes/profile");
 const AuthRouter = require("../Routes/auth");
 const UserRouter = require("../Routes/user");
 const PostRouter = require("../Routes/post");
+const ReactRouter = require("../Routes/react");
 
 module.exports = function (app) {
   app.use("/public", express.static("public"));
