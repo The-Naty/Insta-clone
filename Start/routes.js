@@ -11,4 +11,5 @@ module.exports = function (app) {
   app.use("/auth", AuthRouter);
   app.use("/user", UserRouter);
   app.use("/post", PostRouter);
+  app.use("/react", ReactRouter);
 };
