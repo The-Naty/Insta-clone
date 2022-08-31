@@ -15,4 +15,9 @@ ReactController.followUser = async (req, res) => {
   }
 };
 
+ReactController.unFollowUser = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
 module.exports = ReactController;
