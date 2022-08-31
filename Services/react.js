@@ -46,10 +46,10 @@ ReactService.unFollowUser = async (followerId, followedId) => {
       followerUser.following.splice(followedIndex, 1);
     }
 
-    followedUser.save();
-    followerUser.save();
+    await followedUser.save();
+    await followerUser.save();
 
-    return { message: `You are now following ${followedUser.nick_name}` };
+    return { message: `You are now unfollowing ${followedUser.nick_name}` };
   } catch (error) {
     console.log(error.message);
     throw error;
