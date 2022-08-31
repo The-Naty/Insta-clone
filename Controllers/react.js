@@ -17,7 +17,16 @@ ReactController.followUser = async (req, res) => {
 
 ReactController.unFollowUser = async (req, res) => {
   try {
-  } catch (error) {}
+    const respond = await ReactService.unFollowUser(
+      req.user._id,
+      req.body.userId
+    );
+
+    res.status(200).send(respond);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
 };
 
 module.exports = ReactController;
