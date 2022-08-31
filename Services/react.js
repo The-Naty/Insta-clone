@@ -37,13 +37,15 @@ ReactService.unFollowUser = async (followerId, followedId) => {
     const followerUser = await User.findById(followerId);
 
     const followerIndex = followedUser.follower.indexOf(followerId);
-    if (followerIndex > -1) {
-      followedUser.follower.splice(followerIndex, 1);
-    }
-
     const followedIndex = followerUser.following.indexOf(followedId);
-    if (followedIndex > -1) {
+
+    if (followerIndex > -1 && followedIndex > -1) {
+      followedUser.follower.splice(followerIndex, 1);
       followerUser.following.splice(followedIndex, 1);
+    } else {
+      return {
+        error: `You already unfollowing this ${followedUser.nick_name}`,
+      };
     }
 
     await followedUser.save();
