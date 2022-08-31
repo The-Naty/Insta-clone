@@ -3,30 +3,32 @@ const ReactController = {};
 
 ReactController.followUser = async (req, res) => {
   try {
-    const respond = await ReactService.followUser(
+    const response = await ReactService.followUser(
       req.user._id,
       req.body.userId
     );
 
-    res.status(200).send(respond);
+    if (response.error) return res.status(400).send(response.error);
+
+    res.status(200).send(response);
   } catch (error) {
     console.log(error);
     res.status(500).send(error.message);
   }
 };
 
-ReactController.unFollowUser = async (req, res) => {
-  try {
-    const respond = await ReactService.unFollowUser(
-      req.user._id,
-      req.body.userId
-    );
+// ReactController.unFollowUser = async (req, res) => {
+//   try {
+//     const respond = await ReactService.unFollowUser(
+//       req.user._id,
+//       req.body.userId
+//     );
 
-    res.status(200).send(respond);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
-  }
-};
+//     res.status(200).send(respond);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send(error.message);
+//   }
+// };
 
 module.exports = ReactController;
