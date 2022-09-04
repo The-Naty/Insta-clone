@@ -21,6 +21,8 @@ PostController.getMyPost = async (req, res) => {
   }
 };
 
+PostController.forYou = async (req, res) => {};
+
 PostController.uploadPicture = async (req, res) => {
   try {
     const response = await PostService.uploadPost(
