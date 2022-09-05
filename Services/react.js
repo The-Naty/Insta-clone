@@ -3,19 +3,25 @@ const User = require("../Models/user");
 
 ReactService.followUser = async (followerId, followedId) => {
   try {
-    if (!followedId) return { error: "wrong user ID" };
+    if (!followedId || followerId === followedId)
+      return { error: "wrong user ID" };
+
     const followedUser = await User.findById(followedId).select("-password");
     const followerUser = await User.findById(followerId).select("-password");
 
-    for (let i = 0; i < followedUser.follower.length; i++) {
-      if (followedUser.follower[i] === followerId) {
-        return { error: `You already following ${followedUser.nick_name}` };
-      }
-    }
     if (!followedUser)
       return { error: `User ${followedUser.nick_name} does not exist` };
     if (!followerUser)
       return { error: `User ${followerUser.nick_name} does not exist` };
+
+    for (let i = 0; i < followedUser.follower.length; i++) {
+      if (
+        followedUser.follower[i] === followerId ||
+        followerUser.following[i] === followedId
+      ) {
+        return { error: `You already following ${followedUser.nick_name}` };
+      }
+    }
 
     followedUser.follower.push(followerId);
     followerUser.following.push(followedId);

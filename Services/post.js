@@ -26,15 +26,22 @@ PostService.getMyPost = async (userId) => {
   }
 };
 
-PostService.forYou = async (userId) => {
+PostService.forYou = async (userId, lastCreatedAt) => {
   try {
     const user = await User.findById(userId);
-    const following = user.following;
-    // const post = await Post.find({ owner_id: userId });
 
-    return following;
+    let post = [];
+    for (i = 0; i < user.following.length; i++) {
+      let temp = await Post.find({ owner_id: user.following[i] });
+      post.push(...temp);
+    }
+    post
+      .find({ createdAt: { $lte: lastCreatedAt } })
+      .limit(10)
+      .sort("-createdAt");
+    return post;
   } catch (error) {
-    consle.log(error);
+    console.log(error);
     return { error: "Internal server error" };
   }
 };
