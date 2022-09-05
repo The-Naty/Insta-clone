@@ -21,7 +21,14 @@ PostController.getMyPost = async (req, res) => {
   }
 };
 
-PostController.forYou = async (req, res) => {};
+PostController.forYou = async (req, res) => {
+  try {
+    const posts = await PostService.forYou(req.user._id);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 PostController.uploadPicture = async (req, res) => {
   try {
