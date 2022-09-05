@@ -30,7 +30,7 @@ PostService.forYou = async (userId) => {
   try {
     const user = await User.findById(userId);
     const following = user.following;
-    const post = await Post.find({ owner_id: userId });
+    // const post = await Post.find({ owner_id: userId });
 
     return following;
   } catch (error) {
