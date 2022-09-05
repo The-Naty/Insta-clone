@@ -1,5 +1,6 @@
 const PostService = {};
 const Post = require("../Models/post");
+const User = require("../Models/user");
 const IMAGESPATH = "./public/uploads/images/";
 
 PostService.getAllPost = async () => {
@@ -27,6 +28,9 @@ PostService.getMyPost = async (userId) => {
 
 PostService.forYou = async (userId) => {
   try {
+    const user = await User.findById(userId);
+    const following = user.following;
+    const post = await Post.find({ owner_id: userId });
   } catch (error) {
     consle.log(error);
     return { error: "Internal server error" };

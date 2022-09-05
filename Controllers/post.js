@@ -14,6 +14,7 @@ PostController.getAllPost = async (res) => {
 PostController.getMyPost = async (req, res) => {
   try {
     const post = await PostService.getMyPost(req.user._id);
+    if (response.error) return res.status(400).send(response.error);
     res.status(200).send(post);
   } catch (error) {
     console.log(error);
@@ -23,7 +24,10 @@ PostController.getMyPost = async (req, res) => {
 
 PostController.forYou = async (req, res) => {
   try {
-    const posts = await PostService.forYou(req.user._id);
+    const response = await PostService.forYou(req.user._id);
+
+    if (response.error) return res.status(400).send(response.error);
+    res.status(200).send(response);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });
