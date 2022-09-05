@@ -25,6 +25,14 @@ PostService.getMyPost = async (userId) => {
   }
 };
 
+PostService.forYou = async (userId) => {
+  try {
+  } catch (error) {
+    consle.log(error);
+    return { error: "Internal server error" };
+  }
+};
+
 PostService.uploadPost = async (userId, fileName, title) => {
   try {
     const newPost = new Post();
