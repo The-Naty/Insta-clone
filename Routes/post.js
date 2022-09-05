@@ -6,6 +6,7 @@ const upload = require("../Middlewares/multer");
 
 router.get("/", PostController.getAllPost);
 router.get("/my", auth, PostController.getMyPost);
+router.get("/foryou", PostController.forYou);
 router.post(
   "/upload",
   [auth, upload.single("post")],
