@@ -31,6 +31,8 @@ PostService.forYou = async (userId) => {
     const user = await User.findById(userId);
     const following = user.following;
     const post = await Post.find({ owner_id: userId });
+
+    return following;
   } catch (error) {
     consle.log(error);
     return { error: "Internal server error" };
