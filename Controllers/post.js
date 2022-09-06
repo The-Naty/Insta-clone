@@ -26,7 +26,7 @@ PostController.getMyPost = async (req, res) => {
 
 PostController.forYou = async (req, res) => {
   try {
-    const response = await PostService.forYou(req.user._id, req.lastCreatedAt);
+    const response = await PostService.forYou(req.user._id);
 
     if (response.error) return res.status(400).send(response.error);
     res.status(200).send(response);

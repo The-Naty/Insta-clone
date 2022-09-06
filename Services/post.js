@@ -30,16 +30,11 @@ PostService.forYou = async (userId, lastCreatedAt) => {
   try {
     const user = await User.findById(userId);
 
-    let post = [];
-    for (i = 0; i < user.following.length; i++) {
-      let temp = await Post.find({ owner_id: user.following[i] });
-      post.push(...temp);
-    }
-    post
-      .find({ createdAt: { $lte: lastCreatedAt } })
+    const dbPosts = await Post.find({ owner_id: { $in: user.following } })
       .limit(10)
       .sort("-createdAt");
-    return post;
+
+    return dbPosts;
   } catch (error) {
     console.log(error);
     return { error: "Internal server error" };
