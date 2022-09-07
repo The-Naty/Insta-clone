@@ -29,7 +29,7 @@ PostService.getMyPost = async (userId) => {
 PostService.forYou = async (userId, lastCreatedAt) => {
   try {
     const user = await User.findById(userId);
-
+    //send last page
     const dbPosts = await Post.find({ owner_id: { $in: user.following } })
       .limit(10)
       .sort("-createdAt");
