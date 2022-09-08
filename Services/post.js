@@ -29,7 +29,6 @@ PostService.getMyPost = async (userId) => {
 PostService.forYou = async (userId, lastCreatedAt) => {
   try {
     const user = await User.findById(userId);
-    //send last page
     const dbPosts = await Post.find({ owner_id: { $in: user.following } })
       .limit(10)
       .sort("-createdAt");
@@ -60,6 +59,9 @@ PostService.uploadPost = async (userId, fileName, title) => {
 PostService.deletePost = async (id) => {
   try {
     const post = await Post.findByIdAndDelete(id);
+
+    if (!post) return { error: "Post not found" };
+
     fs.unlinkSync(IMAGESPATH + post.image);
     return post;
   } catch (error) {

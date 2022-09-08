@@ -16,7 +16,7 @@ PostController.getAllPost = async (req, res) => {
 PostController.getMyPost = async (req, res) => {
   try {
     const post = await PostService.getMyPost(req.user._id);
-    if (response.error) return res.status(400).send(response.error);
+    if (post.error) return res.status(400).send(post.error);
     res.status(200).send(post);
   } catch (error) {
     console.log(error);
@@ -56,12 +56,13 @@ PostController.uploadPicture = async (req, res) => {
 PostController.deletePost = async (req, res) => {
   try {
     const post = await PostService.deletePost(req.params.id);
-    console.log(post);
-    if (!post) return res.status(404).send({ message: "Post not found" });
+
+    if (post.error) return res.status(400).send(post.error);
     res.status(200).send(`Post is successfully deleted`);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Internal server error" });
   }
 };
+
 module.exports = PostController;
