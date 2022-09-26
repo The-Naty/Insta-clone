@@ -29,12 +29,6 @@ const editUser = {
   }),
 };
 
-// const changePassword ={
-//   body: Joi.object().keys({
-
-//   })
-// };
-
 module.exports = {
   createUser,
 };

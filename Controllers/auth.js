@@ -32,30 +32,4 @@ AuthController.userLogin = async (req, res) => {
   }
 };
 
-// AuthController.getGoogleUser = async (req, res) => {
-//   try {
-//     passport.authenticate("google", {
-//       scope: ["profile", "email"],
-//       accessType: "offline",
-//       prompt: "consent",
-//       state: "secret-state",
-//       hd: "example.com",
-//       includeGrantedScopes: true,
-//       session: false,
-//       passReqToCallback: true,
-//     })(req, res);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send({ message: "Internal server error" });
-//   }
-// };
-// AuthController.getGoogleUserCallback = (req, res) => {
-//   passport.authenticate("google", {
-//     successRedirect: "http://localhost:5000/user/auth/google/callback",
-//   });
-// };
-// AuthController.loginSuccess = (req, res) => {
-//   req.Json({ message: "Authentication is successfull" });
-// };
-
 module.exports = AuthController;
