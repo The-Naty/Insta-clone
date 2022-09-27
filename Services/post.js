@@ -43,7 +43,9 @@ PostService.forYou = async (userId, lastCreatedAt) => {
 PostService.uploadPost = async (userId, fileName, title) => {
   try {
     const newPost = new Post();
+    const owner = await User.findById(userId);
     newPost.owner_id = userId;
+    newPost.owner_name = owner.nick_name;
     newPost.image = fileName;
     newPost.title = title;
 
