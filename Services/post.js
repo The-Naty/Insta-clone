@@ -35,10 +35,12 @@ PostService.forYou = async (
     const user = await User.findById(userId);
     const dbPosts = await Post.find({
       owner_id: { $in: user.following },
-      created_at: { $lte: lastCreatedAt },
+      created_at: { $lt: lastCreatedAt },
     })
       .limit(limit)
       .sort("-created_at");
+
+    if (dbPosts.length == 0) return "You are all caught up!";
 
     return dbPosts;
   } catch (error) {
