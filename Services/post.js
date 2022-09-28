@@ -26,12 +26,21 @@ PostService.getMyPost = async (userId) => {
   }
 };
 
-PostService.forYou = async (userId, lastCreatedAt) => {
+PostService.forYou = async (
+  userId,
+  lastCreatedAt = new Date().toISOString(),
+  limit
+) => {
   try {
     const user = await User.findById(userId);
-    const dbPosts = await Post.find({ owner_id: { $in: user.following } })
-      .limit(10)
-      .sort("-createdAt");
+    const dbPosts = await Post.find({
+      owner_id: { $in: user.following },
+      created_at: { $lt: lastCreatedAt },
+    })
+      .limit(limit)
+      .sort("-created_at");
+
+    if (dbPosts.length == 0) return "You are all caught up!";
 
     return dbPosts;
   } catch (error) {
