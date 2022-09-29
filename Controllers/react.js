@@ -33,10 +33,10 @@ ReactController.unFollowUser = async (req, res) => {
 
 ReactController.likePost = async (req, res) => {
   try {
-    const response = await ReactService.likePost();
+    const response = await ReactService.likePost(req.user._id, req.body.postId);
 
     if (response.error) return res.status(400).send(response.error);
-    res.status(200).send();
+    res.status(200).send(response);
   } catch {
     res.status(500).send(error.message);
   }

@@ -1,5 +1,6 @@
 const ReactService = {};
 const User = require("../Models/user");
+const Post = require("../Models/post");
 
 ReactService.followUser = async (followerId, followedId) => {
   try {
@@ -9,10 +10,8 @@ ReactService.followUser = async (followerId, followedId) => {
     const followedUser = await User.findById(followedId).select("-password");
     const followerUser = await User.findById(followerId).select("-password");
 
-    if (!followedUser)
-      return { error: `User ${followedUser.nick_name} does not exist` };
-    if (!followerUser)
-      return { error: `User ${followerUser.nick_name} does not exist` };
+    if (!followedUser) return { error: `User does not exist` };
+    if (!followerUser) return { error: `User does not exist` };
 
     for (let i = 0; i < followedUser.follower.length; i++) {
       if (
@@ -58,6 +57,19 @@ ReactService.unFollowUser = async (followerId, followedId) => {
     await followerUser.save();
 
     return { message: `You are now unfollowing ${followedUser.nick_name}` };
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+};
+
+ReactService.likePost = async (userId, postId) => {
+  try {
+    const post = await Post.findByIdAndUpdate(postId, likes.push(userId));
+
+    if (!post) throw Error;
+
+    return { message: `liked` };
   } catch (error) {
     console.log(error.message);
     throw error;
