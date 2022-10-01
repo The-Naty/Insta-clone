@@ -37,7 +37,7 @@ ReactController.likePost = async (req, res) => {
 
     if (response.error) return res.status(400).send(response.error);
     res.status(200).send(response);
-  } catch {
+  } catch (error) {
     res.status(500).send(error.message);
   }
 };

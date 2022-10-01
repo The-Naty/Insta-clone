@@ -65,14 +65,18 @@ ReactService.unFollowUser = async (followerId, followedId) => {
 
 ReactService.likePost = async (userId, postId) => {
   try {
-    const post = await Post.findByIdAndUpdate(postId, likes.push(userId));
+    const post = await Post.findById(postId);
 
-    if (!post) throw Error;
+    if (!post) return { error: `Post does not exist` };
+
+    post.likes.push(userId);
+
+    await post.save();
 
     return { message: `liked` };
   } catch (error) {
-    console.log(error.message);
-    throw error;
+    console.log(error);
+    throw { message: "post not found" };
   }
 };
 
