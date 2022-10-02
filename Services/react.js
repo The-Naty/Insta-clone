@@ -83,7 +83,25 @@ ReactService.likePost = async (userId, postId) => {
     return { message: `Liked` };
   } catch (error) {
     console.log(error);
-    throw { message: "post not found" };
+    throw { message: "error" };
+  }
+};
+
+ReactService.commentPost = async (userId, postId, comment) => {
+  try {
+    const newComment = new Comment();
+    const user = await User.findById(userId);
+    newComment.owner_id = userId;
+    newComment.owner_name = user.nick_name;
+    newComment.post_id = postId;
+    newComment.comment = comment;
+
+    await newComment.save();
+
+    return { message: `Comment submitted` };
+  } catch (error) {
+    console.log(comment);
+    throw { message: "Cant submit comment" };
   }
 };
 

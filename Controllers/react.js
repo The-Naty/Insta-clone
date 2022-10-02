@@ -41,4 +41,19 @@ ReactController.likePost = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+ReactController.commentPost = async (req, res) => {
+  try {
+    const response = await ReactService.commentPost(
+      req.user._id,
+      req.body.postId,
+      req.body.comment
+    );
+
+    if (response.error) return res.status(400).send(response.error);
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
 module.exports = ReactController;
