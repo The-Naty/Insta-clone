@@ -68,12 +68,19 @@ ReactService.likePost = async (userId, postId) => {
     const post = await Post.findById(postId);
 
     if (!post) return { error: `Post does not exist` };
+    for (let i = 0; i < post.likes.length; i++) {
+      if (post.likes[i].match(userId)) {
+        post.likes.splice(i, 1);
+        await post.save();
 
+        return { message: `Unliked` };
+      }
+    }
     post.likes.push(userId);
 
     await post.save();
 
-    return { message: `liked` };
+    return { message: `Liked` };
   } catch (error) {
     console.log(error);
     throw { message: "post not found" };
