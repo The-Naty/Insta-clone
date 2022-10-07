@@ -1,6 +1,7 @@
 const PostService = {};
 const Post = require("../Models/post");
 const User = require("../Models/user");
+const Comment = require("../Models/comment");
 const IMAGESPATH = "./public/uploads/images/";
 
 PostService.getAllPost = async () => {

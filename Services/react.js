@@ -1,6 +1,7 @@
 const ReactService = {};
 const User = require("../Models/user");
 const Post = require("../Models/post");
+const Comment = require("../Models/comment");
 
 ReactService.followUser = async (followerId, followedId) => {
   try {
@@ -91,6 +92,7 @@ ReactService.commentPost = async (userId, postId, comment) => {
   try {
     const newComment = new Comment();
     const user = await User.findById(userId);
+
     newComment.owner_id = userId;
     newComment.owner_name = user.nick_name;
     newComment.post_id = postId;
@@ -100,7 +102,7 @@ ReactService.commentPost = async (userId, postId, comment) => {
 
     return { message: `Comment submitted` };
   } catch (error) {
-    console.log(comment);
+    console.log(error);
     throw { message: "Cant submit comment" };
   }
 };
